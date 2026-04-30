@@ -38,15 +38,15 @@ public class BookDaoTest {
 	//@Test
 	public void testSaveBook() {
 		Book book = new Book();
-		book.setAuthor("Author 4");
-		book.setTitle("Title 4");
-		book.setYear(2019);
+		book.setAuthor("Author 5");
+		book.setTitle("Title 5");
+		book.setYear(2021);
 		this.bookDao.save(book);
 		log.info(""+book);
 	}
-	//@Test
+	@Test
 	public void testUpdateBook() {
-		Optional<Book> result = this.bookDao.findById(13L);
+		Optional<Book> result = this.bookDao.findById(1L);
 		Book book = result.get();
 		book.setYear(2017);
 		this.bookDao.save(book);

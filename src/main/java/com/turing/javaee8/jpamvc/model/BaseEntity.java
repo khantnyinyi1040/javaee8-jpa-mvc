@@ -1,5 +1,6 @@
 package com.turing.javaee8.jpamvc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,7 +17,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseEntity {
+public class BaseEntity  implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
