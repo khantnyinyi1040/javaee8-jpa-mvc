@@ -20,6 +20,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
+
 @ToString
 @Entity
 public class Movie extends BaseEntity{
