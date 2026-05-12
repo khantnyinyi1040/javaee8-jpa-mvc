@@ -113,7 +113,7 @@ public class MovieDaoTest {
 		Optional<Director> resultDirector = this.directorDao.findById(1L);
 		Director director = resultDirector.get();
 		
-		movie.getDirector().add(director);
+		movie.getDirectors().add(director);
 		this.movieDao.save(movie);
 	}
 	

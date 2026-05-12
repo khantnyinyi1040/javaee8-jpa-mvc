@@ -16,6 +16,7 @@ public class MovieDetails extends BaseEntity{
 	
 	@OneToOne
 	@JoinColumn(name = "movie_id")
+	@ToString.Exclude
 	Movie movie;
 	
 	@Column

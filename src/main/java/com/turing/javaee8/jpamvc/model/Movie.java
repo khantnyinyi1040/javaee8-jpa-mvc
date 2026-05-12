@@ -21,7 +21,7 @@ import lombok.ToString;
 @Getter
 @Setter
 
-@ToString
+//@ToString
 @Entity
 public class Movie extends BaseEntity{
 
@@ -41,6 +41,7 @@ public class Movie extends BaseEntity{
 	
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name="movie_id")
+	@ToString.Exclude
 	List<Comment> comment= new ArrayList<>();
 	//if don't creating new List we cant call movie.getComment()
 	//it will throw null to prevent use this to return 0 instead NULL
@@ -56,6 +57,7 @@ public class Movie extends BaseEntity{
 	@JoinTable(name="actor_in_movie",
 			joinColumns = { @JoinColumn(name = "movie_id") },
             inverseJoinColumns = { @JoinColumn(name = "actor_id") })
+	@ToString.Exclude
 	private Set<Actor> actors = new HashSet<>();
 	//private List<Actor> actors = new ArrayList<>();
 	
@@ -68,7 +70,14 @@ public class Movie extends BaseEntity{
 	@JoinTable(name="director_in_movie",
 			joinColumns = { @JoinColumn(name = "movie_id") },
             inverseJoinColumns = { @JoinColumn(name = "director_id") })
-	private Set<Director> director = new HashSet<>();
+	@ToString.Exclude
+	private Set<Director> directors = new HashSet<>();
+
+	@Override
+	public String toString() {
+		return "Movie [title=" + title + ", year=" + year + ", genre=" + genre + ", details=" + details + ", comment="
+				+ comment + ", actors=" + actors + "]";
+	}
 	
 	
 	

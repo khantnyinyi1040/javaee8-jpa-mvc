@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 
 import com.turing.javaee8.jpamvc.model.Movie;
+import com.turing.javaee8.jpamvc.model.dto.TitleAndYear;
+import com.turing.javaee8.jpamvc.model.dto.TitleWithYear;
 import com.turing.javaee8.jpamvc.repository.MovieDao;
 import com.turing.javaee8.jpamvc.repository.MovieDaoTest;
 
@@ -131,12 +133,114 @@ public class MovieQueryTest {
 		System.out.println(affectedRow);
 	}
 	
-	@Test
+	//@Test
 	@Transactional
 	public void testShowAllMovies() {
 			
 		List<Movie> movies= this.movieDao.showAllMovie();
 		movies.forEach(System.err::println);
 	}
+	//@Test
+	@Transactional
+	public void testShowAllMoviesAndActors() {
+			
+		List<Movie> movies= this.movieDao.testShowAllMoviesAndActors();
+		movies.forEach(System.err::println);
+	}
+	//@Test
+	@Transactional
+	public void testInterfaceProjection() {
+			
+		List<TitleAndYear> titlesAndYears = this.movieDao.getAllMoviesByTitleAndYear();
+		for(TitleAndYear result: titlesAndYears){
+			System.err.println("Title"+result.getTitle()+"Year \t "+result.getYear());
+		}
+	}
+	//@Test
+	@Transactional
+	public void testGetAllMoviesByTtile() {
+			
+		List<String> titles = this.movieDao.getAllMoviesByTitle();
+			titles.forEach(System.err::println);
+		
+	}
+	//@Test
+	@Transactional
+	public void testGetAllMoviesByTitleWithYear() {
+			
+		List<TitleWithYear> titles = this.movieDao.getAllMoviesTitleWithYear();
+			titles.forEach(System.err::println);
+		
+	}
+	
+	//@Test
+	@Transactional
+	public void getMovieDetails() {
+			
+		List<String> details = this.movieDao.getMovieDetails();
+			details.forEach(System.err::println);
+		
+	}
+	//@Test
+	@Transactional
+	public void findByTitleJPQL() {
+		List<String> titles = this.movieDao.findByTitleJPQL("juring");
+		titles.forEach(System.err::println);
+	}
+	//@Test
+	@Transactional
+	public void findByNameJPQL() {
+		List<Movie> movies = this.movieDao.findByNameJPQL("mar");
+		for(Movie movie: movies) {
+			System.err.println("Actor"+movie.getActors()+"Movie"+movie.getTitle());
+			}
+		}
+		//@Test
+		@Transactional
+		public void getAllMoviesLazy() {
+			List<Movie> movies = this.movieDao.getAllMoviesLazy("mar");
+			for(Movie movie: movies) {
+				System.err.println("Actor"+movie.getActors()+"Movie"+movie.getTitle());
+			}	
+		}
+		
+		//@Test
+		@Transactional
+		public void getAllMoviesCount() {
+			Long moviesCount = this.movieDao.getAllMoviesCount();
+			System.err.println(moviesCount);
+	}
+		//@Test
+		@Transactional
+		public void getGenre() {
+			List<String> genres = this.movieDao.getGenre(2);
+			genres.forEach(System.err::println);
+		}
+		//@Test
+		@Transactional
+		public void getAllGenre() {
+			List<String> genres = this.movieDao.getAllGenre();
+			genres.forEach(System.err::println);
+		}
+		//@Test
+		@Transactional
+		public void getAllMovieOrderByYear() {
+			List<String> genres = this.movieDao.getAllMovieOrderByYear();
+			genres.forEach(System.err::println);
+		}
+		
+		//@Test
+		@Transactional
+		public void getLimitMovie() {
+			List<Movie> movies = this.movieDao.getLimitMovie(5);
+			movies.forEach(System.err::println);
+		}
+		
+		@Test
+		@Transactional
+		public void getAllMovieNative() {
+			List<Movie> movies = this.movieDao.getAllMovieNative();
+			movies.forEach(System.err::println);
+		}
 }
 

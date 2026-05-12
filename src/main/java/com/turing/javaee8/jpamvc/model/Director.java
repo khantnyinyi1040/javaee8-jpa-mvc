@@ -29,6 +29,6 @@ public class Director extends Human{
 					CascadeType.MERGE,
 					CascadeType.PERSIST
 			}, 
-				mappedBy = "director")
+				mappedBy = "directors")
 	private Set<Movie> movies = new HashSet<Movie>();
 }
