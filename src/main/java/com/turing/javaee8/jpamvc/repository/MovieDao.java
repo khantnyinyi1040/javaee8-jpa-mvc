@@ -13,7 +13,7 @@ import com.turing.javaee8.jpamvc.model.Movie;
 
 public interface MovieDao extends JpaRepository<Movie,Long>,JpaSpecificationExecutor<Movie> {
 
-	/*~~(class org.openrewrite.java.tree.J$Erroneous cannot be cast to class org.openrewrite.java.tree.J$Assignment (org.openrewrite.java.tree.J$Erroneous and org.openrewrite.java.tree.J$Assignment are in unnamed module of loader 'app'))~~>*/@Query("SELECT m FROM Movie m WHERE m.title = :title")
+	@Query("SELECT m FROM Movie m WHERE m.title = :title")
 	List<Movie> findByTitle(String title);
 	List<Movie> findByTitleLike(String title);
 	List<Movie> findByGenreAndYear(String genre,Integer year);
@@ -44,7 +44,7 @@ public interface MovieDao extends JpaRepository<Movie,Long>,JpaSpecificationExec
 	@Query("select m from Movie m")
 	List<Movie> showAllMovie();
 	
-	@Query("select m from Movie m join details left join actors")
+	@Query("select m from Movie m join m.details left join m.actors")
 	List<Movie> testShowAllMoviesAndActors();
 	
 	@Query("select m.title AS title,m.year AS year from Movie m")
@@ -56,16 +56,16 @@ public interface MovieDao extends JpaRepository<Movie,Long>,JpaSpecificationExec
 	@Query("select m.title AS title,m.year as year from Movie m")
 	List<TitleWithYear> getAllMoviesTitleWithYear();
 	
-	@Query("select m.details.details from Movie m join details")
+	@Query("select m.details.details from Movie m join m.details")
 	List<String> getMovieDetails();
 	
 	@Query("select m.title from Movie m where m.title like %:title%")
 	List<String> findByTitleJPQL(String title);
 	
-	@Query("select m from Movie m left join actors act where act.firstName like %:firstName%")
+	@Query("select m from Movie m left join m.actors act where act.firstName like %:firstName%")
 	List<Movie> findByNameJPQL(String firstName);
 	
-	@Query("select m from Movie m left join actors act left join fetch directors where  act.firstName like %:firstName%")
+	@Query("select m from Movie m left join m.actors act left join fetch m.directors where  act.firstName like %:firstName%")
 	List<Movie> getAllMoviesLazy(String firstName);
 	
 	@Query("select count(m) from Movie m")
